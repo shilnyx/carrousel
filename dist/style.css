@@ -1,0 +1,142 @@
+/* carrousel */
+@import "https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css";
+.carrousel,
+.carrousel * {
+  box-sizing: border-box;
+}
+.carrousel {
+  font-size: 1rem;
+  height: 100%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-rows: max-content 1fr max-content;
+  grid-template-areas:
+    ". . f"
+    "l . r"
+    "p b c";
+  border-radius: 0.25rem;
+  color: white;
+}
+.carrousel:focus {
+  outline: 1px solid currentcolor;
+}
+
+.carrousel.full-view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  font-size: 1.5rem;
+  --object-fit: contain !important;
+  border-radius: 0;
+}
+.carrousel.hide-controls .control {
+  opacity: 0;
+  pointer-events: 0;
+}
+.carrousel .slides {
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+  display: flex;
+  flex-grow: grow;
+  height: 100%;
+  overflow: hidden;
+  border-radius:inherit;
+}
+
+.carrousel > *:not(.slides) {
+  margin: 0.5em;
+}
+.carrousel .slides img {
+  --backgroundOverlay: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  background: #1d1e22;
+  object-fit: var(--object-fit, cover);
+  transition: margin-left 1s ease;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carrousel .icon {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.carrousel .arrow-left {
+  grid-area: l;
+  font-size: 1.5em;
+}
+.carrousel .arrow-right {
+  grid-area: r;
+  font-size: 1.5em;
+}
+.carrousel .full-view-btn {
+  grid-area: f;
+}
+.carrousel .auto-play-btn {
+  grid-area: p;
+}
+.carrousel .controls-hide-btn {
+  grid-area: c;
+}
+.carrousel .bullets {
+  grid-area: b;
+  display: flex;
+  gap: 0.5rem;
+}
+/* for demo */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #060606;
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 20em;
+  gap: 2em;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+@media (min-width: 40rem) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.container > *:first-child {
+  grid-column: 1/-1;
+}
+
+.controls-info {
+  max-width: max-content;
+  display: grid;
+  text-align: left;
+  margin-inline: auto;
+  grid-template-columns: repeat(3, auto);
+}
+.controls-info * {
+  padding: 0.25em 0.5em;
+  align-self: center;
+}
+.controls-info .title {
+  border-bottom: 1px solid lightgray;
+  font-weight: 600;
+}
+.controls-info .icon {
+  display: flex;
+  justify-content: center;
+  border-inline: 1px dashed lightgray;
+}
+.controls-info .double {
+  grid-column: span 2;
+  border-left: 1px dashed lightgray;
+}
